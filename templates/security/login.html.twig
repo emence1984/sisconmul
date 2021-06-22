@@ -1,0 +1,93 @@
+
+ <title>{% block title %}Login!{% endblock %}</title>
+{% block header_custom_menu %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+{% endblock header_custom_menu %}
+
+
+ {% block sidebar %}
+                <section class="sidebar">
+               
+                </section>
+ {% endblock sidebar %}
+
+{% block content %}
+
+
+
+<div class="container h-00">
+  <div class="row h-50 justify-content-center align-items-center">
+    <div class="cell-6 bg-warning rounded my-3 p-5">
+        
+      <div align="center">   <i class="fa fa-address-card" style="font-size:60px;color:black"></i>
+        <h2> Ingreso al Sistema - SISCONMUL </h2>
+      </div>
+
+
+      <form action="{{ path('login') }}" method="post">
+
+        <div class="form-group">
+          
+          <br/>
+          <table>
+            <tr>
+            <td width="50px"> </td>
+              <td> <label for="usuario" class="control-label required font-weight-bold">Usuario: </label>   </td>
+               <td width="50px"> </td>
+              <td>  <input type="text" id="usuario" name="_usuario" value="{{ last_username }}" /> </td>
+            </tr>
+            <tr>
+            <td width="50px"> </td>
+              <td> </td>
+              <td> </td>
+               <td> </td>
+            </tr>
+            <tr>
+            <td width="50px"> </td>
+              <td>  <label for="password" class="control-label required font-weight-bold">Clave:   </label> </td>
+               <td> </td>
+              <td>  <input type="password" id="password" name="_password" /> </td>
+            </tr>
+          </table>
+
+<br/>
+          {% if error %}
+                <div  class="alert alert-error font-weight-bold bg-danger" >
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="zmdi-close"></i></button>
+                    
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}  
+             
+        </div>
+
+
+
+           <button type="submit" class="btn btn-primary">Ingresar</button>
+
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+        <div class="row">
+            
+             <div class="col-xs-12">
+            
+
+
+             </div>
+        </div>
+    </div>
+
+
+{% endblock %}

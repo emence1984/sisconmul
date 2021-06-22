@@ -1,0 +1,93 @@
+security:
+    encoders:
+        App\Entity\SmUsuario:
+            algorithm: bcrypt
+            cost: 12
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\SmUsuario
+                property: usuario #esto es para que el logueo se haga por el email
+    
+    firewalls:
+     main:
+            anonymous: ~
+            form_login:
+                username_parameter: _usuario  #esto es para que el logueo se haga por el email
+                login_path: login
+                check_path: login
+                #target_path_parameter: dashboard
+            provider: app_user_provider
+            logout:
+                path:   logout
+                target: login
+                
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/*, roles:  [ROLE_ADMIN, ROLE_USER]}
+
+
+#security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    
+  #  enable_authenticator_manager: true
+    
+  #  providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        #app_user_provider:
+        #    entity:
+        #        class: App\Entity\SmUsuario
+        #        property: usuario
+        #users_in_memory: { memory: null }
+   #     our_db_provider:
+  #          entity:
+    #            class: App\Entity\User
+      #          property: username
+
+   # encoders:
+        # use your user class name here
+    #    App\Entity\SmUsuario:
+            # Use native password encoder
+            # This value auto-selects the best possible hashing algorithm
+            # (i.e. Sodium when available).  auto
+      #      algorithm: bcrypt
+
+
+   # providers:
+  #      users_in_memory: { memory: null }
+  #  firewalls:
+     #   main:
+    #        pattern:    ^/
+    #        http_basic: ~
+    #        provider: our_db_provider
+        
+        
+       # dev:
+       #     pattern: ^/(_(profiler|wdt)|css|images|js)/
+       #     security: false
+       # main:
+            #anonymous: lazy
+       #     lazy: true
+      #      custom_authenticator: App\Security\LoginFormAuthenticator
+       #     logout:
+        #        path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+           # provider: users_in_memory
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+   # access_control:
+   #      - { path: ^/admin, roles: ROLE_ADMIN }
+   #      - { path: ^/dashboard, roles: ROLE_USER }
+   #      - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/profile, roles: ROLE_USER }
+
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
